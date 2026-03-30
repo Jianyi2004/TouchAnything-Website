@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="TouchAnything: The First Dataset and Framework for Egocentric-video based Bilateral Hand Tactile Distribution Estimation">
+  <meta name="description" content="First large-scale multi-view tactile dataset for egocentric hand-object interaction with 302 tasks, bimanual pose, and dense pressure maps.">
+  <meta name="keywords" content="tactile prediction, egocentric vision, hand-object interaction, multi-view learning, pressure sensing, computer vision, robotics">
+  <meta name="author" content="M-PAI Lab, Touch Group">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="M-PAI Lab - Harbin Institute of Technology">
+  <meta property="og:title" content="TouchAnything: Multi-View Tactile Prediction">
+  <meta property="og:description" content="First large-scale multi-view tactile dataset for egocentric hand-object interaction">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TouchAnything: Multi-View Tactile Prediction">
+  
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="TouchAnything: The First Dataset and Framework for Egocentric-video based Bilateral Hand Tactile Distribution Estimation">
+  <meta name="citation_author" content="M-PAI Lab, Touch Group">
+  <meta name="citation_publication_date" content="2026">
+  
+  <title>TouchAnything | Multi-View Tactile Prediction</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-primary: #0a0e1a;
+      --bg-secondary: #111827;
+      --bg-tertiary: #1a202e;
+      --bg-card: #1e293b;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-primary: #3b82f6;
+      --accent-secondary: #8b5cf6;
+      --accent-cyan: #06b6d4;
+      --accent-pink: #ec4899;
+      --border-color: #334155;
+      --glow-blue: rgba(59, 130, 246, 0.3);
+      --glow-purple: rgba(139, 92, 246, 0.3);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.4;
+      background: 
+        radial-gradient(circle at 20% 50%, var(--glow-blue) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, var(--glow-purple) 0%, transparent 50%);
+      animation: bgShift 20s ease-in-out infinite;
+    }
+    
+    @keyframes bgShift {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(50px, 50px); }
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Header */
+    header {
+      padding: 4rem 0 2rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      animation: fadeInUp 0.8s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+    
+    .authors {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      animation: fadeInUp 0.8s ease-out 0.3s both;
+    }
+    
+    .affiliation {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+    
+    /* Buttons */
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+      animation: fadeInUp 0.8s ease-out 0.5s both;
+    }
+    
+    .btn {
+      padding: 0.875rem 2rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.5s;
+    }
+    
+    .btn:hover::before {
+      left: 100%;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: white;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border-color: var(--border-color);
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--accent-primary);
+      background: var(--bg-tertiary);
+      transform: translateY(-2px);
+    }
+    
+    /* Sections */
+    section {
+      margin: 4rem 0;
+      padding: 3rem;
+      background: var(--bg-card);
+      border-radius: 1rem;
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-cyan));
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    h2 i {
+      color: var(--accent-primary);
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem;
+      color: var(--text-primary);
+    }
+    
+    p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+    
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    
+    .feature-card {
+      background: var(--bg-tertiary);
+      padding: 2rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-primary), transparent);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-primary);
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+    
+    .feature-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+    
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    
+    .stat-card {
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+      border-radius: 0.75rem;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+    
+    .stat-card:hover {
+      transform: scale(1.05);
+      border-color: var(--accent-primary);
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    
+    /* List Styles */
+    ul {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+    
+    li {
+      padding: 0.75rem 0;
+      padding-left: 2rem;
+      position: relative;
+      color: var(--text-secondary);
+    }
+    
+    li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+    
+    /* Code blocks */
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg-secondary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      color: var(--accent-cyan);
+      font-size: 0.9rem;
+    }
+    
+    pre {
+      background: var(--bg-secondary);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      margin: 1rem 0;
+    }
+    
+    /* Images */
+    .teaser-image {
+      width: 100%;
+      border-radius: 0.75rem;
+      margin: 2rem 0;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 0;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      margin-top: 4rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .container {
+        padding: 0 1rem;
+      }
+      
+      section {
+        padding: 2rem 1.5rem;
+      }
+    }
+    
+    /* Scroll animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation"></div>
+  
+  <div class="container">
+    <header>
+      <h1>TouchAnything</h1>
+      <p class="subtitle">The First Dataset and Framework for Egocentric-video based Bilateral Hand Tactile Distribution Estimation</p>
+      <p class="authors"><strong>M-PAI Lab, Touch Group</strong></p>
+      <p class="affiliation">Harbin Institute of Technology, Shenzhen</p>
+      
+      <div class="button-group">
+        <a href="#" class="btn btn-primary">
+          <i class="fas fa-file-pdf"></i> Paper (Coming Soon)
+        </a>
+        <a href="#" class="btn btn-secondary">
+          <i class="fab fa-github"></i> Code (Coming Soon)
+        </a>
+        <a href="#" class="btn btn-secondary">
+          <i class="fas fa-database"></i> Dataset (Coming Soon)
+        </a>
+        <a href="/web_viewer" class="btn btn-secondary">
+          <i class="fas fa-chart-bar"></i> Data Viewer
+        </a>
+      </div>
+    </header>
+    
+    <!-- Teaser -->
+    <section class="fade-in">
+      <h2><i class="fas fa-image"></i> Overview</h2>
+      
+      <!-- Video Overview -->
+      <div style="max-width: 100%; margin: 0 auto 2rem;">
+        <video controls autoplay loop muted playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+          <source src="./static/videos/网站首页视频.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 0.95rem;">
+          Overview of the TouchAnything dataset with multi-view capture, bimanual pose tracking, and dense full-hand tactile sensing.
+        </p>
+      </div>
+      
+      <!-- Static Teaser Image (fallback/additional) -->
+      <img src="./static/figures/teaser.png?v=2" alt="TouchAnything Overview" class="teaser-image">
+    </section>
+    
+    <!-- Abstract -->
+    <section class="fade-in">
+      <h2><i class="fas fa-align-left"></i> Abstract</h2>
+      <p>
+        Vision has become the dominant sensing modality for hand-object interaction, yet it remains insufficient for dexterous manipulation as it cannot directly capture contact forces, pressure distributions, or subtle contact state changes. While tactile sensing provides these critical cues, high-quality tactile hardware is difficult to deploy at scale, motivating increasing interest in <em>vision-to-touch prediction</em>, which aims to infer tactile feedback from visual observations.
+
+However, progress in this area is fundamentally limited by the lack of large-scale, diverse, and high-fidelity datasets. Existing datasets are often small, restricted to single-view capture or narrow interaction scenarios, or lack dense tactile ground truth. In particular, egocentric single-view observations suffer from severe occlusion of hand-object contact regions, making accurate tactile inference highly challenging.
+
+To address these limitations, we introduce <strong>TouchAnything</strong>, a large-scale multi-view tactile dataset for egocentric hand-object interaction. TouchAnything contains 302 diverse manipulation tasks spanning 4,530 episodes across both indoor and outdoor environments, with synchronized multi-view observations (egocentric and dual wrist-mounted cameras), bimanual 3D hand pose annotations, and dense continuous pressure maps captured by wearable tactile sensors. This rich multimodal setup enables comprehensive modeling of contact dynamics under realistic conditions.
+
+Building upon this dataset, we establish a new benchmark for multi-view tactile prediction and propose a unified architecture that leverages a shared DINOv2 encoder, learnable view embeddings, cross-view attention, and a view dropout strategy to support flexible inference under varying view availability.
+
+Extensive experiments demonstrate that incorporating complementary wrist views significantly improves tactile prediction accuracy, particularly under severe occlusions, highlighting the importance of multi-view perception for tactile reasoning.
+
+We will publicly release the dataset, code, and benchmark to advance research in vision-based tactile understanding and embodied intelligence.
+      </p>
+    </section>
+    
+    <!-- Key Features -->
+    <section class="fade-in">
+      <h2><i class="fas fa-star"></i> Key Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-video"></i></div>
+          <div class="feature-title">Multi-View Capture</div>
+          <p class="feature-desc">First dataset combining multi-view synchronized video (egocentric + dual wrist cameras) with real tactile pressure data</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-hand-paper"></i></div>
+          <div class="feature-title">Dense Tactile Sensing</div>
+          <p class="feature-desc">Real continuous pressure distributions from wearable sensors, not pseudo labels or binary contact</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-hands"></i></div>
+          <div class="feature-title">Bimanual Interaction</div>
+          <p class="feature-desc">Captures two-handed manipulation with 42-joint 3D hand pose annotations across diverse tasks</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-sync"></i></div>
+          <div class="feature-title">Synchronized Modalities</div>
+          <p class="feature-desc">Frame-level temporal synchronization across all modalities: video, pose, and pressure</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Dataset Statistics -->
+    <section class="fade-in">
+      <h2><i class="fas fa-chart-bar"></i> Dataset Statistics</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number">302</span>
+          <span class="stat-label">Manipulation Tasks</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">4.5K</span>
+          <span class="stat-label">Episodes</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">3</span>
+          <span class="stat-label">Camera Views</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">42</span>
+          <span class="stat-label">Hand Joints</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Contributions -->
+    <section class="fade-in">
+      <h2><i class="fas fa-lightbulb"></i> Main Contributions</h2>
+      <ul>
+        <li><strong>First large-scale multi-view tactile dataset</strong> for egocentric hand-object interaction, comprising 302 tasks, 4,530 episodes, bimanual pose, and dense continuous pressure maps across diverse indoor and outdoor scenes</li>
+        <li><strong>First multi-view tactile prediction benchmark</strong>, including evaluation protocols that quantify the role of complementary wrist views and show clear gains under severe occlusion</li>
+        <li><strong>New multi-view tactile prediction architecture</strong> with shared vision encoding, cross-view attention, and view dropout, enabling flexible inference with any combination of available views</li>
+      </ul>
+    </section>
+    
+    <!-- Data Collection -->
+    <section class="fade-in">
+      <h2><i class="fas fa-camera"></i> Data Collection Setup</h2>
+      <img src="./static/figures/data_collection.png" alt="Data Collection Setup" class="teaser-image">
+      <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 0.95rem;">
+        Multi-sensor data collection system with head-mounted egocentric camera, dual wrist cameras, and pressure-sensing gloves.
+      </p>
+      <p style="margin-top: 1.5rem;">
+        Our data collection system integrates:
+      </p>
+      <ul>
+        <li><strong>Head-mounted Camera</strong>: Captures global manipulation context from first-person view</li>
+        <li><strong>Dual Wrist Cameras</strong>: Observe hand-object contact regions to overcome occlusion</li>
+        <li><strong>Pressure-Sensing Gloves</strong>: Record dense 16×16 pressure maps on each palm</li>
+        <li><strong>Motion Capture</strong>: Tracks 42-joint bimanual 3D hand pose at 30Hz</li>
+        <li><strong>Temporal Synchronization</strong>: All modalities aligned with millisecond precision</li>
+      </ul>
+    </section>
+    
+    <!-- Example Data -->
+    <section class="fade-in">
+      <h2><i class="fas fa-th"></i> Example Multi-Modal Data</h2>
+      <img src="./static/figures/example_of_touchanything.png" alt="Example Data" class="teaser-image">
+      <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 0.95rem;">
+        Example showing synchronized multi-view video, hand pose, and pressure maps revealing contact information invisible to vision alone.
+      </p>
+    </section>
+    
+    <!-- Dataset Statistics -->
+    <section class="fade-in">
+      <h2><i class="fas fa-chart-line"></i> Dataset Analysis</h2>
+      <img src="./static/figures/data_statistic_3.png" alt="Dataset Statistics" class="teaser-image">
+      <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 0.95rem;">
+        Comprehensive statistics showing diverse pressure patterns, balanced task coverage, and rich contact interactions.
+      </p>
+    </section>
+    
+    <!-- Method Overview -->
+    <section class="fade-in">
+      <h2><i class="fas fa-cogs"></i> Method Architecture</h2>
+      <img src="./static/figures/model_architecture.png" alt="Model Architecture" class="teaser-image">
+      <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 0.95rem;">
+        Multi-view tactile prediction architecture with shared vision encoding, cross-view attention, and pose-aware fusion.
+      </p>
+      <p style="margin-top: 1.5rem;">
+        We propose a multi-view tactile prediction model based on:
+      </p>
+      <ul>
+        <li><strong>Shared DINOv2 Vision Encoder</strong>: Extracts features from all camera views</li>
+        <li><strong>Learnable View Embeddings</strong>: Distinguishes between egocentric and wrist viewpoints</li>
+        <li><strong>Cross-View Transformer Attention</strong>: Fuses complementary information across views</li>
+        <li><strong>View Dropout Training</strong>: Enables robust inference with missing views</li>
+      </ul>
+      <p>
+        This design allows the model to work with any subset of available views at inference time, from ego-only to full multi-view, making it practical for real-world deployment.
+      </p>
+    </section>
+    
+    <!-- Results: Data Scaling -->
+    <section class="fade-in">
+      <h2><i class="fas fa-chart-area"></i> Data Scaling Analysis</h2>
+      <img src="./static/figures/data_scaling_ablation_combined.png" alt="Data Scaling" class="teaser-image">
+      <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 0.95rem;">
+        Performance improves consistently with more training data, demonstrating the model's ability to leverage large-scale datasets.
+      </p>
+    </section>
+    
+    <!-- Results: Per-Category Performance -->
+    <section class="fade-in">
+      <h2><i class="fas fa-tasks"></i> Performance by Task Category</h2>
+      <img src="./static/figures/per_category_performance.png" alt="Per-Category Performance" class="teaser-image">
+      <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 0.95rem;">
+        Performance breakdown across task categories. Soft objects and outdoor activities are more challenging due to deformable materials and dynamic lighting.
+      </p>
+    </section>
+    
+    <!-- Qualitative Results -->
+    <section class="fade-in">
+      <h2><i class="fas fa-eye"></i> Qualitative Results</h2>
+      <img src="./static/figures/infer_example.png" alt="Qualitative Results" class="teaser-image">
+      <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 0.95rem;">
+        Tactile prediction results showing accurate contact region and pressure intensity prediction across diverse manipulation tasks.
+      </p>
+    </section>
+    
+    <!-- Applications -->
+    <section class="fade-in">
+      <h2><i class="fas fa-rocket"></i> Applications</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-robot"></i></div>
+          <div class="feature-title">Robotic Manipulation</div>
+          <p class="feature-desc">Enable robots to anticipate contact forces from vision alone, without physical tactile sensors</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-vr-cardboard"></i></div>
+          <div class="feature-title">AR/VR Haptics</div>
+          <p class="feature-desc">Drive realistic haptic feedback in virtual environments based on predicted pressure maps</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-hand-holding-heart"></i></div>
+          <div class="feature-title">Assistive Prosthetics</div>
+          <p class="feature-desc">Provide sensory feedback to prosthetic users for better grasp force modulation</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-brain"></i></div>
+          <div class="feature-title">Interaction Understanding</div>
+          <p class="feature-desc">Support research on contact detection, grasp quality, and manipulation skill assessment</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Citation -->
+    <section class="fade-in">
+      <h2><i class="fas fa-quote-right"></i> Citation</h2>
+      <pre><code>@article{touchanything2026,
+  title={TouchAnything: The First Dataset and Framework for Egocentric-video based Bilateral Hand Tactile Distribution Estimation},
+  author={M-PAI Lab, Touch Group},
+  journal={Technical Report},
+  year={2026},
+  institution={Harbin Institute of Technology, Shenzhen}
+}</code></pre>
+    </section>
+    
+    <footer>
+      <p>&copy; 2026 M-PAI Lab, Harbin Institute of Technology, Shenzhen. All rights reserved.</p>
+      <p style="margin-top: 1rem; font-size: 0.9rem;">
+        <a href="#" style="color: var(--accent-primary); text-decoration: none;">Privacy Policy</a> | 
+        <a href="#" style="color: var(--accent-primary); text-decoration: none;">Terms of Use</a>
+      </p>
+    </footer>
+  </div>
+  
+  <script>
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
