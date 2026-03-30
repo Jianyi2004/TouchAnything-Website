@@ -370,6 +370,79 @@
       font-weight: 500;
     }
     
+    /* Table Styles */
+    .table-container {
+      overflow-x: auto;
+      margin: 2rem 0;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-tertiary);
+    }
+    
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    
+    .comparison-table thead {
+      background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+      border-bottom: 2px solid var(--accent-primary);
+    }
+    
+    .comparison-table th {
+      padding: 1rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+    
+    .comparison-table tbody tr {
+      border-bottom: 1px solid var(--border-color);
+      transition: background 0.2s ease;
+    }
+    
+    .comparison-table tbody tr:hover {
+      background: rgba(59, 130, 246, 0.05);
+    }
+    
+    .comparison-table tbody tr.highlight-row {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+      border-top: 2px solid var(--accent-primary);
+      border-bottom: 2px solid var(--accent-primary);
+    }
+    
+    .comparison-table tbody tr.highlight-row:hover {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
+    }
+    
+    .comparison-table td {
+      padding: 0.875rem 0.75rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+    
+    .comparison-table td:first-child {
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+    
+    .comparison-table .highlight-row td {
+      color: var(--text-primary);
+    }
+    
+    @media (max-width: 768px) {
+      .comparison-table {
+        font-size: 0.8rem;
+      }
+      
+      .comparison-table th,
+      .comparison-table td {
+        padding: 0.5rem 0.4rem;
+      }
+    }
+    
     /* List Styles */
     ul {
       list-style: none;
@@ -419,6 +492,7 @@
       border: 1px solid var(--border-color);
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
+
     
     /* Footer */
     footer {
@@ -454,6 +528,9 @@
     .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+    .app-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   </style>
 </head>
@@ -506,17 +583,17 @@
     <section class="fade-in">
       <h2><i class="fas fa-align-left"></i> Abstract</h2>
       <p>
-        Vision has become the dominant sensing modality for hand-object interaction, yet it remains insufficient for dexterous manipulation as it cannot directly capture contact forces, pressure distributions, or subtle contact state changes. While tactile sensing provides these critical cues, high-quality tactile hardware is difficult to deploy at scale, motivating increasing interest in <em>vision-to-touch prediction</em>, which aims to infer tactile feedback from visual observations.
+Vision has become the dominant sensing modality for hand-object interaction, yet it remains insufficient for dexterous manipulation as it cannot directly capture contact forces, pressure distributions, or subtle contact state changes. While tactile sensing provides these critical cues, high-quality tactile hardware is difficult to deploy at scale, motivating increasing interest in <em>vision-to-touch prediction</em>, which aims to infer tactile feedback from visual observations.
 
 However, progress in this area is fundamentally limited by the lack of large-scale, diverse, and high-fidelity datasets. Existing datasets are often small, restricted to single-view capture or narrow interaction scenarios, or lack dense tactile ground truth. In particular, egocentric single-view observations suffer from severe occlusion of hand-object contact regions, making accurate tactile inference highly challenging.
 
-To address these limitations, we introduce <strong>TouchAnything</strong>, a large-scale multi-view tactile dataset for egocentric hand-object interaction. TouchAnything contains 302 diverse manipulation tasks spanning 4,530 episodes across both indoor and outdoor environments, with synchronized multi-view observations (egocentric and dual wrist-mounted cameras), bimanual 3D hand pose annotations, and dense continuous pressure maps captured by wearable tactile sensors. This rich multimodal setup enables comprehensive modeling of contact dynamics under realistic conditions.
+To address these limitations, we introduce <strong>TouchAnything</strong>, a large-scale multi-view tactile dataset for egocentric hand-object interaction. TouchAnything contains 302 diverse manipulation tasks spanning 4,530 episodes across both indoor and outdoor environments, with synchronized multi-view observations (egocentric and dual wrist-mounted cameras), bimanual 3D hand pose annotations, and dense continuous pressure maps captured by wearable tactile sensors. This setup enables learning cross-view consistent representations of contact dynamics under realistic occlusion and interaction variability.
 
-Building upon this dataset, we establish a new benchmark for multi-view tactile prediction and propose a unified architecture that leverages a shared DINOv2 encoder, learnable view embeddings, cross-view attention, and a view dropout strategy to support flexible inference under varying view availability.
+Building upon this dataset, we establish a new benchmark for multi-view tactile prediction and propose a unified architecture that leverages a shared DINOv2 encoder, learnable view embeddings, cross-view attention, and a view dropout strategy to support flexible inference under varying view availability. Effectively leveraging multi-view observations is non-trivial due to view inconsistency and partial observability, which our design explicitly addresses.
 
-Extensive experiments demonstrate that incorporating complementary wrist views significantly improves tactile prediction accuracy, particularly under severe occlusions, highlighting the importance of multi-view perception for tactile reasoning.
+Extensive experiments demonstrate that incorporating complementary wrist views is critical for resolving occluded contact regions and enabling reliable tactile inference, particularly under severe occlusions, highlighting the importance of multi-view perception for tactile reasoning.
 
-We will publicly release the dataset, code, and benchmark to advance research in vision-based tactile understanding and embodied intelligence.
+We will publicly release the dataset, code, and benchmark to bridge the gap between visual perception and physical interaction in embodied systems.
       </p>
     </section>
     
@@ -533,19 +610,19 @@ We will publicly release the dataset, code, and benchmark to advance research in
         <div class="feature-card">
           <div class="feature-icon"><i class="fas fa-hand-paper"></i></div>
           <div class="feature-title">Dense Tactile Sensing</div>
-          <p class="feature-desc">Real continuous pressure distributions from wearable sensors, not pseudo labels or binary contact</p>
+          <p class="feature-desc">Real continuous pressure distributions from wearable sensors, capturing fine-grained contact dynamics</p>
         </div>
         
         <div class="feature-card">
           <div class="feature-icon"><i class="fas fa-hands"></i></div>
           <div class="feature-title">Bimanual Interaction</div>
-          <p class="feature-desc">Captures two-handed manipulation with 42-joint 3D hand pose annotations across diverse tasks</p>
+          <p class="feature-desc">Bimanual manipulation with 42-joint 3D hand pose annotations, enabling analysis of coordinated hand-object interaction</p>
         </div>
         
         <div class="feature-card">
           <div class="feature-icon"><i class="fas fa-sync"></i></div>
           <div class="feature-title">Synchronized Modalities</div>
-          <p class="feature-desc">Frame-level temporal synchronization across all modalities: video, pose, and pressure</p>
+          <p class="feature-desc">Precise frame-level synchronization across video, pose, and pressure, enabling accurate temporal modeling of contact events</p>
         </div>
       </div>
     </section>
@@ -573,6 +650,142 @@ We will publicly release the dataset, code, and benchmark to advance research in
       </div>
     </section>
     
+    <!-- Dataset Comparison Table -->
+    <section class="fade-in">
+      <h2><i class="fas fa-table"></i> Dataset Comparison</h2>
+      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+        TouchAnything is the first dataset to jointly provide multi-view video, bimanual hand pose, and real dense pressure data across diverse scenes.
+      </p>
+      <div class="table-container">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Dataset</th>
+              <th>In-the-wild</th>
+              <th>Hand Pose</th>
+              <th>Contact</th>
+              <th>Wrist Views</th>
+              <th>Hands</th>
+              <th>Objects</th>
+              <th>Frames</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GRAB</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>MoCap</td>
+              <td>Analytical</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Biman.</td>
+              <td>51</td>
+              <td>1.6M</td>
+            </tr>
+            <tr>
+              <td>ContactDB</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Thermal</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Both</td>
+              <td>50</td>
+              <td>375k</td>
+            </tr>
+            <tr>
+              <td>ARCTIC</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>MoCap</td>
+              <td>Analytical</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Biman.</td>
+              <td>11</td>
+              <td>2.1M</td>
+            </tr>
+            <tr>
+              <td>OakInk</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>MoCap</td>
+              <td>Analytical</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Single</td>
+              <td>100</td>
+              <td>230k</td>
+            </tr>
+            <tr>
+              <td>DexYCB</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Est.</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Single</td>
+              <td>20</td>
+              <td>582k</td>
+            </tr>
+            <tr>
+              <td>ActionSense</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Glove</td>
+              <td>Pressure</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Biman.</td>
+              <td>21</td>
+              <td>521k</td>
+            </tr>
+            <tr>
+              <td>HOI4D</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Est.</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Single</td>
+              <td>800</td>
+              <td>2.4M</td>
+            </tr>
+            <tr>
+              <td>EgoPressure</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Est.</td>
+              <td>Pressure</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Single</td>
+              <td>31</td>
+              <td>4.3M</td>
+            </tr>
+            <tr>
+              <td>EgoDex</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Est.</td>
+              <td>Analytical</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Biman.</td>
+              <td>194</td>
+              <td>90M</td>
+            </tr>
+            <tr>
+              <td>OpenTouch</td>
+              <td><i class="fas fa-check" style="color: #10b981;"></i></td>
+              <td>Glove</td>
+              <td>Pressure</td>
+              <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
+              <td>Single</td>
+              <td>66</td>
+              <td>~500k</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><strong>TouchAnything (Ours)</strong></td>
+              <td><i class="fas fa-check" style="color: #10b981;"></i></td>
+              <td><strong>Glove</strong></td>
+              <td><strong>Pressure</strong></td>
+              <td><i class="fas fa-check" style="color: #10b981;"></i></td>
+              <td><strong>Biman.</strong></td>
+              <td><strong>302</strong></td>
+              <td><strong>2M</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
     <!-- Contributions -->
     <section class="fade-in">
       <h2><i class="fas fa-lightbulb"></i> Main Contributions</h2>
@@ -594,7 +807,7 @@ We will publicly release the dataset, code, and benchmark to advance research in
         Our data collection system integrates:
       </p>
       <ul>
-        <li><strong>Head-mounted Camera</strong>: Captures global manipulation context from first-person view</li>
+        <li><strong>Head-mounted Wide-Angle Camera</strong>: Captures global manipulation context from a wide-field first-person perspective</li>
         <li><strong>Dual Wrist Cameras</strong>: Observe hand-object contact regions to overcome occlusion</li>
         <li><strong>Pressure-Sensing Gloves</strong>: Record dense 16×16 pressure maps on each palm</li>
         <li><strong>Motion Capture</strong>: Tracks 42-joint bimanual 3D hand pose at 30Hz</li>
@@ -669,34 +882,47 @@ We will publicly release the dataset, code, and benchmark to advance research in
     </section>
     
     <!-- Applications -->
-    <section class="fade-in">
-      <h2><i class="fas fa-rocket"></i> Applications</h2>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-robot"></i></div>
-          <div class="feature-title">Robotic Manipulation</div>
-          <p class="feature-desc">Enable robots to anticipate contact forces from vision alone, without physical tactile sensors</p>
+
+     
+     <section class="fade-in">
+        <h2><i class="fas fa-rocket"></i> Applications</h2>
+
+        <!-- 🔥 Core -->
+        <h3 class="app-subtitle">Core Applications</h3>
+        <div class="feature-grid app-grid">
+
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-robot"></i></div>
+            <div class="feature-title">Robotic Manipulation</div>
+            <p class="feature-desc">See contact. Predict force. Enable reliable manipulation under occlusion.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-brain"></i></div>
+            <div class="feature-title">Interaction Understanding</div>
+            <p class="feature-desc">Move beyond vision. Understand contact dynamics, grasp quality, and manipulation skills.</p>
+          </div>
+
         </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-vr-cardboard"></i></div>
-          <div class="feature-title">AR/VR Haptics</div>
-          <p class="feature-desc">Drive realistic haptic feedback in virtual environments based on predicted pressure maps</p>
+
+        <!-- 🌍 Broader -->
+        <h3 class="app-subtitle">Broader Impact</h3>
+        <div class="feature-grid app-grid">
+
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-vr-cardboard"></i></div>
+            <div class="feature-title">AR/VR Haptics</div>
+            <p class="feature-desc">Bring touch into virtual worlds through vision-driven haptic feedback.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-hand-holding-heart"></i></div>
+            <div class="feature-title">Assistive Prosthetics</div>
+            <p class="feature-desc">Support vision-based sensory feedback for more intuitive prosthetic control.</p>
+          </div>
+
         </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-hand-holding-heart"></i></div>
-          <div class="feature-title">Assistive Prosthetics</div>
-          <p class="feature-desc">Provide sensory feedback to prosthetic users for better grasp force modulation</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-brain"></i></div>
-          <div class="feature-title">Interaction Understanding</div>
-          <p class="feature-desc">Support research on contact detection, grasp quality, and manipulation skill assessment</p>
-        </div>
-      </div>
-    </section>
+      </section>
     
     <!-- Citation -->
     <section class="fade-in">
