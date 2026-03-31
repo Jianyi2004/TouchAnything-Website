@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!-- Primary Meta Tags -->
-  <meta name="title" content="TouchAnything: The First Dataset and Framework for Egocentric-video based Bilateral Hand Tactile Distribution Estimation">
+  <meta name="title" content="TouchAnything: A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video">
   <meta name="description" content="First large-scale multi-view tactile dataset for egocentric hand-object interaction with 302 tasks, bimanual pose, and dense pressure maps.">
   <meta name="keywords" content="tactile prediction, egocentric vision, hand-object interaction, multi-view learning, pressure sensing, computer vision, robotics">
   <meta name="author" content="M-PAI Lab, Touch Group">
@@ -22,7 +22,7 @@
   <meta name="twitter:title" content="TouchAnything: Multi-View Tactile Prediction">
   
   <!-- Academic/Research Specific -->
-  <meta name="citation_title" content="TouchAnything: The First Dataset and Framework for Egocentric-video based Bilateral Hand Tactile Distribution Estimation">
+  <meta name="citation_title" content="TouchAnything: A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video">
   <meta name="citation_author" content="M-PAI Lab, Touch Group">
   <meta name="citation_publication_date" content="2026">
   
@@ -540,7 +540,7 @@
   <div class="container">
     <header>
       <h1>TouchAnything</h1>
-      <p class="subtitle">The First Dataset and Framework for Egocentric-video based Bilateral Hand Tactile Distribution Estimation</p>
+      <p class="subtitle">A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video</p>
       <p class="authors"><strong>M-PAI Lab, Touch Group</strong></p>
       <p class="affiliation">Harbin Institute of Technology, Shenzhen</p>
       
@@ -567,7 +567,7 @@
       <!-- Video Overview -->
       <div style="max-width: 100%; margin: 0 auto 2rem;">
         <video controls autoplay loop muted playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-          <source src="./static/videos/网站首页视频v2.mp4" type="video/mp4">
+          <source src="./static/videos/网站首页视频v3.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
         <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 1rem; line-height: 1.6;">
@@ -758,7 +758,7 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
               <td>Analytical</td>
               <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
               <td>Biman.</td>
-              <td>194</td>
+              <td>500</td>
               <td>90M</td>
             </tr>
             <tr>
@@ -768,7 +768,7 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
               <td>Pressure</td>
               <td><i class="fas fa-times" style="color: #ef4444;"></i></td>
               <td>Single</td>
-              <td>66</td>
+              <td>800</td>
               <td>~500k</td>
             </tr>
             <tr class="highlight-row">
@@ -854,6 +854,80 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
       </p>
     </section>
     
+    <!-- Model Inference Results -->
+    <section class="fade-in">
+      <h2><i class="fas fa-play-circle"></i> Model Inference Results</h2>
+      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+        Real-world tactile prediction results on diverse manipulation tasks. Our model accurately predicts contact regions and pressure distributions from multi-view video input.
+      </p>
+      
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 2rem;">
+        <!-- Video 1: 拿保温杯 -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <video controls loop muted playsinline style="width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">
+            <source src="./static/videos/拿保温杯_20260325_171636_233_tactile.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p style="text-align: center; color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">Grasping Thermos</p>
+          <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Multi-view tactile prediction during bimanual thermos manipulation</p>
+        </div>
+        
+        <!-- Video 2: 拿耳机 -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <video controls loop muted playsinline style="width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">
+            <source src="./static/videos/拿耳机_20260314_162611_000_tactile.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p style="text-align: center; color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">Handling Headphones</p>
+          <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Fine-grained contact prediction on deformable objects</p>
+        </div>
+        
+        <!-- Video 3: 拿饮料 -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <video controls loop muted playsinline style="width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">
+            <source src="./static/videos/拿饮料_20260325_163212_035_tactile.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p style="text-align: center; color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">Grasping Beverage</p>
+          <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Accurate pressure estimation during bottle manipulation</p>
+        </div>
+        
+        <!-- Video 4: 拿鼠标 -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <video controls loop muted playsinline style="width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">
+            <source src="./static/videos/拿鼠标2_20260316_215323_166_tactile.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p style="text-align: center; color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">Picking Up Mouse</p>
+          <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Precise contact localization on small objects</p>
+        </div>
+        
+        <!-- Video 6: 颠乒乓球 -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <video controls loop muted playsinline style="width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">
+            <source src="./static/videos/颠乒乓球_20260320_172305_280_tactile.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p style="text-align: center; color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">Bouncing Ping-Pong Ball</p>
+          <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Temporal contact prediction during dynamic interaction</p>
+        </div>
+        <!-- Video 5: 插拔USB -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <video controls loop muted playsinline style="width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">
+            <source src="./static/videos/插拔USB接口_20260319_115503_602_tactile.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p style="text-align: center; color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">USB Insertion</p>
+          <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Fine manipulation with dynamic contact changes</p>
+        </div>
+        
+      </div>
+      
+      <p style="text-align: center; color: var(--text-secondary); margin-top: 2rem; font-size: 1rem;">
+        These results demonstrate our model's ability to predict realistic tactile feedback across diverse manipulation scenarios, from static grasping to dynamic interactions.
+      </p>
+    </section>
+    
     <!-- Results: Data Scaling -->
     <section class="fade-in">
       <h2><i class="fas fa-chart-area"></i> Data Scaling Analysis</h2>
@@ -928,7 +1002,7 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
     <section class="fade-in">
       <h2><i class="fas fa-quote-right"></i> Citation</h2>
       <pre><code>@article{touchanything2026,
-  title={TouchAnything: The First Dataset and Framework for Egocentric-video based Bilateral Hand Tactile Distribution Estimation},
+  title={TouchAnything: A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video},
   author={M-PAI Lab, Touch Group},
   journal={Technical Report},
   year={2026},
