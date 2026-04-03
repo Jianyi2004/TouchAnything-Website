@@ -8,7 +8,7 @@
   <meta name="title" content="TouchAnything: A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video">
   <meta name="description" content="First large-scale multi-view tactile dataset for egocentric hand-object interaction with 302 tasks, bimanual pose, and dense pressure maps.">
   <meta name="keywords" content="tactile prediction, egocentric vision, hand-object interaction, multi-view learning, pressure sensing, computer vision, robotics">
-  <meta name="author" content="M-PAI Lab, Touch Group">
+  <meta name="author" content="Jianyi Zhou, Ziteng Gao, Feiyang Hong, Zirui Liu, Guannan Zhang, Weisheng Dai, Ruichen Zhen, Xushi Wang, Yuxiang Jiang, Xuhua Song, Shuo Yang">
   <meta name="robots" content="index, follow">
   
   <!-- Open Graph / Facebook -->
@@ -23,7 +23,17 @@
   
   <!-- Academic/Research Specific -->
   <meta name="citation_title" content="TouchAnything: A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video">
-  <meta name="citation_author" content="M-PAI Lab, Touch Group">
+  <meta name="citation_author" content="Jianyi Zhou">
+  <meta name="citation_author" content="Ziteng Gao">
+  <meta name="citation_author" content="Feiyang Hong">
+  <meta name="citation_author" content="Zirui Liu">
+  <meta name="citation_author" content="Guannan Zhang">
+  <meta name="citation_author" content="Weisheng Dai">
+  <meta name="citation_author" content="Ruichen Zhen">
+  <meta name="citation_author" content="Xushi Wang">
+  <meta name="citation_author" content="Yuxiang Jiang">
+  <meta name="citation_author" content="Xuhua Song">
+  <meta name="citation_author" content="Shuo Yang">
   <meta name="citation_publication_date" content="2026">
   
   <title>TouchAnything | Multi-View Tactile Prediction</title>
@@ -541,8 +551,15 @@
     <header>
       <h1>TouchAnything</h1>
       <p class="subtitle">A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video</p>
-      <p class="authors"><strong>M-PAI Lab, Touch Group</strong></p>
-      <p class="affiliation">Harbin Institute of Technology, Shenzhen</p>
+      <p class="authors">
+        <strong>Jianyi Zhou<sup>1</sup>, Ziteng Gao<sup>1</sup>, Feiyang Hong<sup>1</sup>, Zirui Liu<sup>1</sup>, Guannan Zhang<sup>1</sup>, Weisheng Dai<sup>1</sup>,<br>
+        Ruichen Zhen<sup>2</sup>, Xushi Wang<sup>1</sup>, Yuxiang Jiang<sup>1</sup>, Xuhua Song<sup>1</sup>, Shuo Yang<sup>1,✉</sup></strong>
+      </p>
+      <p class="affiliation">
+        <sup>1</sup>Harbin Institute of Technology, Shenzhen &nbsp;&nbsp;
+        <sup>2</sup>Meituan Academy of Robotics<br>
+        <sup>✉</sup>Corresponding author: <a href="mailto:shuoyang@hit.edu.cn" style="color: var(--accent-primary); text-decoration: none;">shuoyang@hit.edu.cn</a>
+      </p>
       
       <div class="button-group">
         <a href="#" class="btn btn-primary">
@@ -554,7 +571,7 @@
         <a href="#" class="btn btn-secondary">
           <i class="fas fa-database"></i> Dataset (Coming Soon)
         </a>
-        <a href="/web_viewer" class="btn btn-secondary">
+        <a href="#" class="btn btn-secondary">
           <i class="fas fa-chart-bar"></i> Data Viewer
         </a>
       </div>
@@ -827,7 +844,7 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
     <!-- Dataset Statistics -->
     <section class="fade-in">
       <h2><i class="fas fa-chart-line"></i> Dataset Analysis</h2>
-      <img src="./static/figures/data_statistic_3.png" alt="Dataset Statistics" class="teaser-image">
+      <img src="./static/figures/data_statistic_4.png" alt="Dataset Statistics" class="teaser-image">
       <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 0.95rem;">
         Comprehensive statistics showing diverse pressure patterns, balanced task coverage, and rich contact interactions.
       </p>
@@ -872,14 +889,14 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
           <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Multi-view tactile prediction during bimanual thermos manipulation</p>
         </div>
         
-        <!-- Video 2: 拿耳机 -->
+        <!-- Video 2: 拿吹风机 -->
         <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
           <video controls loop muted playsinline style="width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">
-            <source src="./static/videos/拿耳机_20260314_162611_000_tactile.mp4" type="video/mp4">
+            <source src="./static/videos/拿吹风机_20260320_094951_941_tactile.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
-          <p style="text-align: center; color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">Handling Headphones</p>
-          <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Fine-grained contact prediction on deformable objects</p>
+          <p style="text-align: center; color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">Handling Hair Dryer</p>
+          <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Contact prediction on complex-shaped household appliances</p>
         </div>
         
         <!-- Video 3: 拿饮料 -->
@@ -914,7 +931,7 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
         <!-- Video 5: 插拔USB -->
         <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
           <video controls loop muted playsinline style="width: 100%; border-radius: 0.5rem; margin-bottom: 1rem;">
-            <source src="./static/videos/插拔USB接口_20260319_115503_602_tactile.mp4" type="video/mp4">
+            <source src="./static/videos/插拔USB接口_20260319_115454_872_tactile.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
           <p style="text-align: center; color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem;">USB Insertion</p>
@@ -999,15 +1016,154 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
       </section>
     
     <!-- Citation -->
-    <section class="fade-in">
+    <!-- <section class="fade-in">
       <h2><i class="fas fa-quote-right"></i> Citation</h2>
       <pre><code>@article{touchanything2026,
   title={TouchAnything: A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video},
-  author={M-PAI Lab, Touch Group},
+  author={Jianyi Zhou\textsuperscript{1}, Ziteng Gao\textsuperscript{1}, Feiyang Hong\textsuperscript{1}, Zirui Liu\textsuperscript{1}, Guannan Zhang\textsuperscript{1}, Weisheng Dai\textsuperscript{1}, Ruichen Zhen\textsuperscript{2}, Xushi Wang\textsuperscript{1}, Yuxiang Jiang\textsuperscript{1}, Xuhua Song\textsuperscript{1}, Shuo Yang\textsuperscript{1,✉}},
   journal={Technical Report},
   year={2026},
-  institution={Harbin Institute of Technology, Shenzhen}
+  institution={\textsuperscript{1}Harbin Institute of Technology, Shenzhen, \textsuperscript{2}Meituan Academy of Robotics},
+  note={\textsuperscript{✉}Corresponding author}
 }</code></pre>
+    </section> -->
+    
+    <!-- Author Contributions -->
+    <section class="fade-in">
+      <h2><i class="fas fa-users"></i> Author Contributions</h2>
+      <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 1rem;">
+        This work represents a collaborative effort across multiple domains, from hardware setup to model development and data collection.
+      </p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+        
+        <!-- Jianyi Zhou -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <i class="fas fa-user-circle"></i> Jianyi Zhou
+          </h3>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>Paper writing and manuscript preparation</li>
+            <li>Model architecture design and training</li>
+            <li>Project website development</li>
+            <li>Experimental equipment management</li>
+            <li>Data collection participation</li>
+          </ul>
+        </div>
+        
+        <!-- Ziteng Gao -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <i class="fas fa-user-circle"></i> Ziteng Gao
+          </h3>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>Data collection pipeline development</li>
+            <li>Paper figure creation (partial)</li>
+            <li>Experimental equipment management</li>
+            <li>Data collection participation</li>
+          </ul>
+        </div>
+        
+        <!-- Feiyang Hong -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <i class="fas fa-user-circle"></i> Feiyang Hong
+          </h3>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>Codebase organization and documentation</li>
+            <li>Paper figure optimization</li>
+            <li>Data collection participation</li>
+          </ul>
+        </div>
+        
+        <!-- Zirui Liu -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <i class="fas fa-user-circle"></i> Zirui Liu
+          </h3>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>Paper figure design and illustration</li>
+            <li>Data collection participation</li>
+          </ul>
+        </div>
+        
+        <!-- Guannan Zhang -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <i class="fas fa-user-circle"></i> Guannan Zhang
+          </h3>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>Project website video editing</li>
+            <li>Data collection participation</li>
+          </ul>
+        </div>
+        
+        <!-- Weisheng Dai -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <i class="fas fa-user-circle"></i> Weisheng Dai
+          </h3>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>Experimental equipment management</li>
+            <li>Data collection participation</li>
+          </ul>
+        </div>
+        
+        <!-- Ruichen Zhen -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <i class="fas fa-user-circle"></i> Ruichen Zhen
+          </h3>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>Equipment procurement and acquisition</li>
+            <li>Data collection hardware configuration</li>
+          </ul>
+        </div>
+        
+        <!-- Xushi Wang -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <i class="fas fa-user-circle"></i> Xushi Wang
+          </h3>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>HaMeR inference framework development</li>
+            <li>Data collection participation</li>
+          </ul>
+        </div>
+        
+        <!-- Yuxiang Jiang -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <i class="fas fa-user-circle"></i> Yuxiang Jiang
+          </h3>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>Data collection participation</li>
+          </ul>
+        </div>
+        
+        <!-- Xuhua Song -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <i class="fas fa-user-circle"></i> Xuhua Song
+          </h3>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>Data collection participation</li>
+          </ul>
+        </div>
+        
+        <!-- Shuo Yang -->
+        <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1)); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--accent-primary);">
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <i class="fas fa-envelope"></i> Shuo Yang <span style="font-size: 0.85rem; color: var(--text-muted);">(Corresponding Author)</span>
+          </h3>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>Research idea and conceptualization</li>
+            <li>Project supervision and guidance</li>
+            <li>Model architecture consultation</li>
+          </ul>
+        </div>
+        
+      </div>
     </section>
     
     <footer>
