@@ -29,9 +29,9 @@
   <meta name="citation_author" content="Zirui Liu">
   <meta name="citation_author" content="Guannan Zhang">
   <meta name="citation_author" content="Weisheng Dai">
-  <meta name="citation_author" content="Yinian Mao">
   <meta name="citation_author" content="Ruichen Zhen">
   <meta name="citation_author" content="Haotian Wu">
+  <meta name="citation_author" content="Yinian Mao">
   <meta name="citation_author" content="Xushi Wang">
   <meta name="citation_author" content="Yuxiang Jiang">
   <meta name="citation_author" content="Shuo Yang">
@@ -553,7 +553,7 @@
       <h1>TouchAnything</h1>
       <p class="subtitle">The First Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video</p>
       <p class="authors">
-        <strong>Jianyi Zhou<sup>1</sup>, Ziteng Gao<sup>1</sup>, Feiyang Hong<sup>1</sup>, Zirui Liu<sup>1</sup>, Guannan Zhang<sup>1</sup>, Weisheng Dai<sup>1</sup>,<br>Yinian Mao<sup>2</sup>, Ruichen Zhen<sup>2</sup>, Haotian Wu<sup>2</sup>, Xushi Wang<sup>1</sup>, Yuxiang Jiang<sup>1</sup>, Shuo Yang<sup>1✉</sup></strong>
+        <strong>Jianyi Zhou<sup>1</sup>, Ziteng Gao<sup>1</sup>, Feiyang Hong<sup>1</sup>, Zirui Liu<sup>1</sup>, Guannan Zhang<sup>1</sup>, Weisheng Dai<sup>1</sup>, Ruichen Zhen<sup>2</sup>, Haotian Wu<sup>2</sup>,<br>Yinian Mao<sup>2</sup>, Xushi Wang<sup>1</sup>, Yuxiang Jiang<sup>1</sup>, Shuo Yang<sup>1✉</sup></strong>
       </p>
       <p class="affiliation">
         <sup>1</sup>Harbin Institute of Technology, Shenzhen &nbsp;&nbsp;
@@ -600,7 +600,18 @@
     <section class="fade-in">
       <h2><i class="fas fa-align-left"></i> Abstract</h2>
       <p>
-Vision has become the dominant sensing modality for hand-object interaction, yet it remains insufficient for dexterous manipulation as it cannot directly capture contact forces, pressure distributions, or subtle contact state changes. While tactile sensing provides these critical cues, high-quality tactile hardware is difficult to deploy at scale, motivating increasing interest in <em>vision-to-touch prediction</em>, which aims to infer tactile feedback from visual observations.
+        Vision has become the dominant sensing modality for hand-object interaction, yet it remains insufficient for dexterous manipulation as it cannot directly capture contact forces, pressure distributions, or subtle contact state changes. While tactile sensing provides these critical cues, high-quality tactile hardware is difficult to deploy at scale, motivating growing interest in vision-to-touch prediction, which aims to infer tactile feedback from visual observations.
+
+However, progress in this area is fundamentally constrained by the lack of large-scale, diverse, and high-fidelity datasets. Existing datasets are often limited in scale, restricted to single-view capture or narrow interaction scenarios, or lack dense tactile ground truth. In particular, egocentric single-view observations suffer from severe occlusion of hand-object contact regions, making accurate tactile inference highly challenging.
+
+To address these limitations, we introduce EgoTouch, a large-scale multi-view tactile dataset for egocentric hand-object interaction. EgoTouch comprises 302 diverse manipulation tasks spanning 4,530 episodes across both indoor and outdoor environments, with synchronized multi-view observations (egocentric and dual wrist-mounted cameras), bimanual 3D hand pose annotations, and dense continuous pressure maps captured by wearable tactile sensors. This comprehensive setup enables learning cross-view consistent representations of contact dynamics under realistic occlusion and interaction variability.
+
+Building upon EgoTouch, we further propose TouchAnything, a unified architecture for multi-view tactile prediction. The model integrates a shared DINOv2 encoder, learnable view embeddings, cross-view attention, and a view dropout strategy, enabling flexible inference under varying view availability. Effectively leveraging multi-view observations is non-trivial due to view inconsistency and partial observability, which our design explicitly addresses.
+
+Extensive experiments demonstrate that incorporating complementary wrist views is crucial for resolving occluded contact regions and enabling reliable tactile inference, particularly under severe occlusions. These results highlight the importance of multi-view perception for tactile reasoning in real-world interaction scenarios.
+
+We will publicly release the dataset, code, and benchmark to facilitate future research bridging visual perception and physical interaction in embodied systems.
+<!-- Vision has become the dominant sensing modality for hand-object interaction, yet it remains insufficient for dexterous manipulation as it cannot directly capture contact forces, pressure distributions, or subtle contact state changes. While tactile sensing provides these critical cues, high-quality tactile hardware is difficult to deploy at scale, motivating increasing interest in <em>vision-to-touch prediction</em>, which aims to infer tactile feedback from visual observations.
 
 However, progress in this area is fundamentally limited by the lack of large-scale, diverse, and high-fidelity datasets. Existing datasets are often small, restricted to single-view capture or narrow interaction scenarios, or lack dense tactile ground truth. In particular, egocentric single-view observations suffer from severe occlusion of hand-object contact regions, making accurate tactile inference highly challenging.
 
@@ -610,7 +621,7 @@ Building upon this dataset, we establish a new benchmark for multi-view tactile 
 
 Extensive experiments demonstrate that incorporating complementary wrist views is critical for resolving occluded contact regions and enabling reliable tactile inference, particularly under severe occlusions, highlighting the importance of multi-view perception for tactile reasoning.
 
-We will publicly release the dataset, code, and benchmark to bridge the gap between visual perception and physical interaction in embodied systems.
+We will publicly release the dataset, code, and benchmark to bridge the gap between visual perception and physical interaction in embodied systems. -->
       </p>
     </section>
     
@@ -955,13 +966,13 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
     </section>
     
     <!-- Results: Per-Category Performance -->
-    <section class="fade-in">
+    <!-- <section class="fade-in">
       <h2><i class="fas fa-tasks"></i> Performance by Task Category</h2>
       <img src="./static/figures/per_category_performance.png" alt="Per-Category Performance" class="teaser-image">
       <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 0.95rem;">
         Performance breakdown across task categories. Soft objects and outdoor activities are more challenging due to deformable materials and dynamic lighting.
       </p>
-    </section>
+    </section> -->
     
     <!-- Qualitative Results -->
     <section class="fade-in">
@@ -1129,6 +1140,16 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
           </ul>
         </div>
         
+        <!-- Yinian Mao -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <i class="fas fa-user-circle"></i> Yinian Mao
+          </h3>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>High-level guidance and project support</li>
+          </ul>
+        </div>
+
         <!-- Xushi Wang -->
         <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
           <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
@@ -1150,15 +1171,6 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
           </ul>
         </div>
         
-        <!-- Yinian Mao -->
-        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
-          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
-            <i class="fas fa-user-circle"></i> Yinian Mao
-          </h3>
-          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
-            <li>High-level guidance and project support</li>
-          </ul>
-        </div>
         
         <!-- Shuo Yang -->
         <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1)); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--accent-primary);">
