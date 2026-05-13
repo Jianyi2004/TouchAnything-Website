@@ -6,14 +6,14 @@
   
   <!-- Primary Meta Tags -->
   <meta name="title" content="TouchAnything: A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video">
-  <meta name="description" content="First large-scale multi-view tactile dataset for egocentric hand-object interaction with 302 tasks, bimanual pose, and dense pressure maps.">
+  <meta name="description" content="First large-scale multi-view tactile dataset for egocentric hand-object interaction with 208 tasks, bimanual pose, and dense pressure maps.">
   <meta name="keywords" content="tactile prediction, egocentric vision, hand-object interaction, multi-view learning, pressure sensing, computer vision, robotics">
-  <meta name="author" content="Jianyi Zhou, Ziteng Gao, Feiyang Hong, Zirui Liu, Guannan Zhang, Weisheng Dai, Yinian Mao, Ruichen Zhen, Chuqiao Lyu, Haotian Wu, Xushi Wang, Yuxiang Jiang, Shuo Yang">
+  <meta name="author" content="Jianyi Zhou, Ziteng Gao, Feiyang Hong, Zirui Liu, Guannan Zhang, Weisheng Dai, Ruichen Zhen, Chuqiao Lyu, Haotian Wu, Yinian Mao, Xushi Wang, Yuxiang Jiang, Wenbo Ding, Shuo Yang">
   <meta name="robots" content="index, follow">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="M-PAI Lab - Harbin Institute of Technology">
+  <meta property="og:site_name" content="Harbin Institute of Technology">
   <meta property="og:title" content="TouchAnything: Multi-View Tactile Prediction">
   <meta property="og:description" content="First large-scale multi-view tactile dataset for egocentric hand-object interaction">
   
@@ -35,6 +35,7 @@
   <meta name="citation_author" content="Yinian Mao">
   <meta name="citation_author" content="Xushi Wang">
   <meta name="citation_author" content="Yuxiang Jiang">
+  <meta name="citation_author" content="Wenbo Ding">
   <meta name="citation_author" content="Shuo Yang">
   <meta name="citation_publication_date" content="2026">
   
@@ -686,11 +687,12 @@
       <h1>TouchAnything</h1>
       <p class="subtitle">The First Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video</p>
       <p class="authors">
-        <strong>Jianyi Zhou<sup>1</sup>, Ziteng Gao<sup>1</sup>, Feiyang Hong<sup>1</sup>, Zirui Liu<sup>1</sup>, Guannan Zhang<sup>1</sup>, Weisheng Dai<sup>1</sup>, <br>Ruichen Zhen<sup>2</sup>, Chuqiao Lyu<sup>2</sup>, Haotian Wu<sup>2</sup>, Yinian Mao<sup>2</sup>, Xushi Wang<sup>1</sup>, Yuxiang Jiang<sup>1</sup>, Shuo Yang<sup>1✉</sup></strong>
+        <strong>Jianyi Zhou<sup>1</sup>, Ziteng Gao<sup>1</sup>, Feiyang Hong<sup>1</sup>, Zirui Liu<sup>1</sup>, Guannan Zhang<sup>1</sup>, Weisheng Dai<sup>1</sup>, <br>Ruichen Zhen<sup>2</sup>, Chuqiao Lyu<sup>3</sup>, Haotian Wu<sup>2</sup>, Yinian Mao<sup>2</sup>, Xushi Wang<sup>1</sup>, Yuxiang Jiang<sup>1</sup>, <br>Wenbo Ding<sup>3</sup>, Shuo Yang<sup>1✉</sup></strong>
       </p>
       <p class="affiliation">
         <sup>1</sup>Harbin Institute of Technology, Shenzhen &nbsp;&nbsp;
         <sup>2</sup>Meituan Academy of Robotics<br>
+        <sup>3</sup>Tsinghua Shenzhen International Graduate School, Tsinghua University<br>
         <sup>✉</sup>Corresponding author: <a href="mailto:shuoyang@hit.edu.cn" style="color: var(--accent-primary); text-decoration: none;">shuoyang@hit.edu.cn</a>
       </p>
       
@@ -721,7 +723,7 @@
           Your browser does not support the video tag.
         </video>
         <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 1rem; line-height: 1.6;">
-          <strong>EgoTouch</strong> is the first large-scale multi-view tactile dataset for egocentric hand-object interaction, featuring <strong>302 diverse manipulation tasks</strong> across <strong>4,530 episodes</strong> in both indoor and outdoor environments. The dataset provides synchronized <strong>multi-view video</strong> (egocentric + dual wrist cameras), <strong>bimanual 3D hand pose</strong> (42 joints), and <strong>dense continuous pressure maps</strong> from wearable tactile sensors. By combining global scene context with wrist-level observations of hand-object contact, TouchAnything enables comprehensive modeling of tactile feedback under realistic occlusion and viewpoint variation.
+          <strong>EgoTouch</strong> is the first large-scale multi-view tactile dataset for egocentric hand-object interaction, featuring <strong>208 diverse manipulation tasks</strong> across <strong>1,891 episodes</strong> in both indoor and outdoor environments. The dataset provides synchronized <strong>multi-view video</strong> (egocentric + dual wrist cameras), <strong>bimanual 3D hand pose</strong> (42 joints), and <strong>dense continuous pressure maps</strong> from wearable tactile sensors. By combining global scene context with wrist-level observations of hand-object contact, TouchAnything enables comprehensive modeling of tactile feedback under realistic occlusion and viewpoint variation.
         </p>
       </div>
       
@@ -733,22 +735,15 @@
     <section class="fade-in">
       <h2><i class="fas fa-align-left"></i> Abstract</h2>
       <p>
-        Vision has become the dominant sensing modality for hand-object interaction, yet it remains insufficient for dexterous manipulation as it cannot directly capture contact forces, pressure distributions, or subtle contact state changes. While tactile sensing provides these critical cues, high-quality tactile hardware is difficult to deploy at scale, motivating growing interest in vision-to-touch prediction, which aims to infer tactile feedback from visual observations.
-
-However, progress in this area is fundamentally constrained by the lack of large-scale, diverse, and high-fidelity datasets. Existing datasets are often limited in scale, restricted to single-view capture or narrow interaction scenarios, or lack dense tactile ground truth. In particular, egocentric single-view observations suffer from severe occlusion of hand-object contact regions, making accurate tactile inference highly challenging.
-
-To address these limitations, we introduce EgoTouch, a large-scale multi-view tactile dataset for egocentric hand-object interaction. EgoTouch comprises 302 diverse manipulation tasks spanning 4,530 episodes across both indoor and outdoor environments, with synchronized multi-view observations (egocentric and dual wrist-mounted cameras), bimanual 3D hand pose annotations, and dense continuous pressure maps captured by wearable tactile sensors. This comprehensive setup enables learning cross-view consistent representations of contact dynamics under realistic occlusion and interaction variability.
-
-Building upon EgoTouch, we further propose TouchAnything, a unified architecture for multi-view tactile prediction. The model integrates a shared DINOv2 encoder, learnable view embeddings, cross-view attention, and a view dropout strategy, enabling flexible inference under varying view availability. Effectively leveraging multi-view observations is non-trivial due to view inconsistency and partial observability, which our design explicitly addresses.
-
-Extensive experiments demonstrate that incorporating complementary wrist views is crucial for resolving occluded contact regions and enabling reliable tactile inference, particularly under severe occlusions. These results highlight the importance of multi-view perception for tactile reasoning in real-world interaction scenarios.
-
-We will publicly release the dataset, code, and benchmark to facilitate future research bridging visual perception and physical interaction in embodied systems.
+      Egocentric human video data, which captures rich human-environment interactions and can be collected at scale, has become a key driver of embodied intelligence research. However, existing egocentric datasets typically lack tactile sensing, a critical modality that provides direct cues about contact, force, and pressure in human-object interaction. Without such signals, models struggle to learn physically grounded representations of real-world interaction dynamics. 
+      While tactile sensors provide these cues, deploying high-quality tactile hardware at scale remains expensive and cumbersome. This raises a central question: can tactile feedback be inferred directly from visual observations, enabling scalable tactile supervision for egocentric video data and supporting physically grounded embodied learning?
+      To enable research in this direction, we introduce \textbf{EgoTouch}, a large-scale multi-view egocentric dataset with dense tactile supervision for bimanual hand-object interaction. EgoTouch comprises 208 manipulation tasks spanning 1,891 episodes in diverse indoor and outdoor environments, with synchronized multi-view RGB (head-mounted egocentric and dual wrist-mounted cameras), bimanual 3D hand pose, and continuous pressure maps from wearable tactile sensors. Building on EgoTouch, we introduce \textbf{TouchAnything}, a baseline multi-view vision-to-touch prediction framework that uses the egocentric view as the primary input and flexibly leverages available wrist-mounted views at inference time.
+      Experiments show that incorporating wrist-mounted views generally improves tactile prediction over egocentric-only input, achieving up to 5.0\% relative improvement in Contact IoU and 6.1\% relative improvement in Volumetric IoU. We will publicly release the dataset, code, and benchmark.
 <!-- Vision has become the dominant sensing modality for hand-object interaction, yet it remains insufficient for dexterous manipulation as it cannot directly capture contact forces, pressure distributions, or subtle contact state changes. While tactile sensing provides these critical cues, high-quality tactile hardware is difficult to deploy at scale, motivating increasing interest in <em>vision-to-touch prediction</em>, which aims to infer tactile feedback from visual observations.
 
 However, progress in this area is fundamentally limited by the lack of large-scale, diverse, and high-fidelity datasets. Existing datasets are often small, restricted to single-view capture or narrow interaction scenarios, or lack dense tactile ground truth. In particular, egocentric single-view observations suffer from severe occlusion of hand-object contact regions, making accurate tactile inference highly challenging.
 
-To address these limitations, we introduce <strong>TouchAnything</strong>, a large-scale multi-view tactile dataset for egocentric hand-object interaction. TouchAnything contains 302 diverse manipulation tasks spanning 4,530 episodes across both indoor and outdoor environments, with synchronized multi-view observations (egocentric and dual wrist-mounted cameras), bimanual 3D hand pose annotations, and dense continuous pressure maps captured by wearable tactile sensors. This setup enables learning cross-view consistent representations of contact dynamics under realistic occlusion and interaction variability.
+To address these limitations, we introduce <strong>TouchAnything</strong>, a large-scale multi-view tactile dataset for egocentric hand-object interaction. TouchAnything contains 208 diverse manipulation tasks spanning 1,891 episodes across both indoor and outdoor environments, with synchronized multi-view observations (egocentric and dual wrist-mounted cameras), bimanual 3D hand pose annotations, and dense continuous pressure maps captured by wearable tactile sensors. This setup enables learning cross-view consistent representations of contact dynamics under realistic occlusion and interaction variability.
 
 Building upon this dataset, we establish a new benchmark for multi-view tactile prediction and propose a unified architecture that leverages a shared DINOv2 encoder, learnable view embeddings, cross-view attention, and a view dropout strategy to support flexible inference under varying view availability. Effectively leveraging multi-view observations is non-trivial due to view inconsistency and partial observability, which our design explicitly addresses.
 
@@ -793,11 +788,11 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
       <h2><i class="fas fa-chart-bar"></i> Dataset Statistics</h2>
       <div class="stats-grid">
         <div class="stat-card">
-          <span class="stat-number">302</span>
+          <span class="stat-number">208</span>
           <span class="stat-label">Manipulation Tasks</span>
         </div>
         <div class="stat-card">
-          <span class="stat-number">4.5K</span>
+          <span class="stat-number">1.9K</span>
           <span class="stat-label">Episodes</span>
         </div>
         <div class="stat-card">
@@ -951,7 +946,7 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
     <section class="fade-in">
       <h2><i class="fas fa-lightbulb"></i> Main Contributions</h2>
       <ul>
-        <li><strong>First large-scale multi-view tactile dataset</strong> for egocentric hand-object interaction, comprising 302 tasks, 4,530 episodes, bimanual pose, and dense continuous pressure maps across diverse indoor and outdoor scenes</li>
+        <li><strong>First large-scale multi-view tactile dataset</strong> for egocentric hand-object interaction, comprising 208 tasks, 1,891 episodes, bimanual pose, and dense continuous pressure maps across diverse indoor and outdoor scenes</li>
         <li><strong>First multi-view tactile prediction benchmark</strong>, including evaluation protocols that quantify the role of complementary wrist views and show clear gains under severe occlusion</li>
         <li><strong>New multi-view tactile prediction architecture</strong> with shared vision encoding, cross-view attention, and view dropout, enabling flexible inference with any combination of available views</li>
       </ul>
@@ -1164,10 +1159,10 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
       <h2><i class="fas fa-quote-right"></i> Citation</h2>
       <pre><code>@article{touchanything2026,
   title={TouchAnything: A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video},
-  author={Jianyi Zhou\textsuperscript{1}, Ziteng Gao\textsuperscript{1}, Feiyang Hong\textsuperscript{1}, Zirui Liu\textsuperscript{1}, Guannan Zhang\textsuperscript{1}, Weisheng Dai\textsuperscript{1}, Ruichen Zhen\textsuperscript{2}, Xushi Wang\textsuperscript{1}, Yuxiang Jiang\textsuperscript{1}, Yinian Mao\textsuperscript{1}, Shuo Yang\textsuperscript{1,✉}},
+  author={Jianyi Zhou\textsuperscript{1}, Ziteng Gao\textsuperscript{1}, Feiyang Hong\textsuperscript{1}, Zirui Liu\textsuperscript{1}, Guannan Zhang\textsuperscript{1}, Weisheng Dai\textsuperscript{1}, Ruichen Zhen\textsuperscript{2}, Chuqiao Lyu\textsuperscript{3}, Haotian Wu\textsuperscript{2}, Yinian Mao\textsuperscript{2}, Xushi Wang\textsuperscript{1}, Yuxiang Jiang\textsuperscript{1}, Wenbo Ding\textsuperscript{3}, Shuo Yang\textsuperscript{1,✉}},
   journal={Technical Report},
   year={2026},
-  institution={\textsuperscript{1}Harbin Institute of Technology, Shenzhen, \textsuperscript{2}Meituan Academy of Robotics},
+  institution={\textsuperscript{1}Harbin Institute of Technology, Shenzhen, \textsuperscript{2}Meituan Academy of Robotics, \textsuperscript{3}Tsinghua Shenzhen International Graduate School, Tsinghua University},
   note={\textsuperscript{✉}Corresponding author}
 }</code></pre>
     </section> -->
@@ -1311,6 +1306,16 @@ We will publicly release the dataset, code, and benchmark to bridge the gap betw
           </h3>
           <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
             <li>Data collection participation</li>
+          </ul>
+        </div>
+
+        <!-- Wenbo Ding -->
+        <div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border-color);">
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <i class="fas fa-user-circle"></i> Wenbo Ding
+          </h3>
+          <ul style="color: var(--text-secondary); line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+            <li>High-level idea discussions</li>
           </ul>
         </div>
         
